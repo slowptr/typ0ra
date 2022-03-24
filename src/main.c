@@ -15,13 +15,13 @@ bool write_regkey(const char *parent_str, HKEY parent_loc, LPCSTR key_loc,
   if (RegOpenKeyEx(parent_loc, key_loc, 0, KEY_SET_VALUE | KEY_WOW64_64KEY,
                    &key) !=
       ERROR_SUCCESS) {
-    printf("[-] [change_regkey] error: %u\n", (unsigned int) GetLastError());
+    printf("[-] [write_regkey] error: %u\n", (unsigned int) GetLastError());
     return false;
   }
 
   if (RegSetValueEx(key, key_name, 0, REG_SZ, (LPBYTE) value,
                     MAX_BUF_SIZE) != ERROR_SUCCESS) {
-    printf("[-] [change_regkey] error: %u\n", (unsigned int) GetLastError());
+    printf("[-] [write_regkey] error: %u\n", (unsigned int) GetLastError());
     RegCloseKey(key);
     return false;
   }
@@ -60,7 +60,7 @@ int main() {
   printf("[+] current date: %s\n\n", date);
 
   if (!WRITE_REGKEY(HKEY_CURRENT_USER, "SOFTWARE\\Typora", "IDate", date)) {
-    printf("[-] change_regkey failed\n");
+    printf("[-] write_regkey failed\n");
   } else {
     printf("\n => should be reset now :)\n");
   }
