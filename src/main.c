@@ -42,8 +42,19 @@ char *get_current_date() {
   return buffer;
 }
 
+void print_info() {
+  printf("\tif you like typora, you should\n");
+  printf("\talso support the developers.\n");
+  printf("\tit is a one-time-payment of 15$.\n");
+  printf("=> press enter to continue.\n");
+  printf("\n");
+
+  getchar();
+}
+
 int main() {
   printf("[+] typora license resetter\n");
+  print_info();
 
   char *date = get_current_date();
   printf("[+] current date: %s\n\n", date);
