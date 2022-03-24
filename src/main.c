@@ -48,5 +48,14 @@ int main() {
   char *date = get_current_date();
   printf("[+] current date: %s\n\n", date);
 
+  if (!WRITE_REGKEY(HKEY_CURRENT_USER, "SOFTWARE\\Typora", "IDate", date)) {
+    printf("[-] change_regkey failed\n");
+  } else {
+    printf("\n => should be reset now :)\n");
+  }
+
+  free(date); // not sure if needed :c
+
+  getchar();
   return 0;
 }
